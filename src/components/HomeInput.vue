@@ -38,13 +38,14 @@ export default {
 
 <style scoped>
 input:focus {
-  outline: none;
+  outline: #fac3fa;
 }
 .inputBox {
   background: white;
   height: 50px;
   line-height: 50px;
   border-radius: 5px;
+  margin: 10px 5px 10px 5px;
 }
 .inputBox input {
   border-style: none;
