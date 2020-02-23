@@ -17,7 +17,7 @@
     </div>
     <div class="boxArea">
       <div class="inputBox shadow">
-        <input type="text" v-model="newTime" placeholder="플레이 시간" />
+        <input type="text" v-model="battleTag" placeholder="닉네임#배틀태그 (선택)" />
       </div>
     </div>
     <div class="submitButton">
@@ -33,12 +33,14 @@ export default {
       newScore: "",
       newFirst: "",
       newWin: "",
-      newTime: ""
+      battleTag: "",
+      isResult: false
     };
   },
   methods: {
     calResult() {
-      console.log(this.newScore, this.newFirst, this.newWin, this.newTime);
+      console.log(this.newScore, this.newFirst, this.newWin);
+      this.isResult = !this.isResult;
       return this.newScore;
     }
   }

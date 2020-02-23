@@ -1,5 +1,7 @@
 <template>
-  <div>result</div>
+  <div>
+    <div>Result on</div>
+  </div>
 </template>
 
 <script>
