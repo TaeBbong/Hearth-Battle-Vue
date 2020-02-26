@@ -23,7 +23,7 @@
     <div class="submitButton">
       <button class="myButton shadow" v-on:click="calResult">결과보기</button>
     </div>
-    <HomeResult :results="results"></HomeResult>
+    <HomeResult :results="results" ref="result" v-if="results"></HomeResult>
   </div>
 </template>
 
@@ -41,11 +41,12 @@ export default {
       newWin: "",
       battleTag: "",
       isResult: false,
-      results: {}
+      results: null
     };
   },
   methods: {
     calResult() {
+      var battleTag = this.battleTag;
       var winPoint = this.newFirst * 90 + (this.newWin - this.newFirst) * 30;
       var losePoint = winPoint - this.newScore + 4000;
       var loseGame = losePoint / 50;
@@ -55,8 +56,9 @@ export default {
       var winningRate = (this.newWin / totalPlay) * 100;
       var estimateRank =
         22.8 * Math.pow(11, 9) * Math.pow(2.714, -0.002 * this.newScore);
-      console.log(estimateRank);
+      console.log("calResult done!");
       this.results = {
+        battleTag,
         loseGame,
         totalPlay,
         avgPointPerGame,
@@ -64,6 +66,7 @@ export default {
         winningRate,
         estimateRank
       };
+      this.$refs.result.updateCanvas(this.results);
     }
   }
 };

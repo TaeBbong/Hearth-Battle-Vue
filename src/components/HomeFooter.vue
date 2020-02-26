@@ -1,5 +1,5 @@
 <template>
-  <div>footer</div>
+  <div>github.com/TaeBbong</div>
 </template>
 
 <script>
