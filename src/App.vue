@@ -2,7 +2,6 @@
   <div id="app">
     <HomeHeader></HomeHeader>
     <HomeInput></HomeInput>
-    <HomeResult v-if="isResult"></HomeResult>
     <HomeMore></HomeMore>
     <HomeFooter></HomeFooter>
   </div>
