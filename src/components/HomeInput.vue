@@ -23,7 +23,7 @@
     <div class="submitButton">
       <button class="myButton shadow" v-on:click="calResult">결과보기</button>
     </div>
-    <HomeResult :results="results" ref="result" v-if="results"></HomeResult>
+    <HomeResult v-bind:val="results" v-if="results"></HomeResult>
   </div>
 </template>
 
@@ -33,6 +33,10 @@ import HomeResult from "./HomeResult";
 export default {
   components: {
     HomeResult: HomeResult
+  },
+  mounted() {
+    console.log("parent mounted!");
+    console.log(this.results);
   },
   data() {
     return {
@@ -56,7 +60,7 @@ export default {
       var winningRate = (this.newWin / totalPlay) * 100;
       var estimateRank =
         22.8 * Math.pow(11, 9) * Math.pow(2.714, -0.002 * this.newScore);
-      console.log("calResult done!");
+      // console.log("calResult done!");
       this.results = {
         battleTag,
         loseGame,
@@ -66,7 +70,8 @@ export default {
         winningRate,
         estimateRank
       };
-      this.$refs.result.updateCanvas(this.results);
+      console.log("calResult done!" + this.results);
+      // this.$refs.results.updateCanvasText();
     }
   }
 };

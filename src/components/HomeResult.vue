@@ -15,11 +15,26 @@ export default {
         fontSize: 30,
         fontColor: "#FFFFFF",
         fontWeight: "normal"
-      }
+      },
+      props: this.results
     };
   },
-  props: ["results"],
+  props: ["val"],
+  watch: {
+    val: {
+      immediate: true,
+      handler(newVal, oldVal) {
+        console.log(newVal);
+        console.log(oldVal);
+        this.updateCanvas();
+      }
+    }
+  },
   mounted() {
+    console.log(this.val);
+    this.updateCanvas();
+  },
+  updated() {
     this.updateCanvas();
   },
   methods: {
@@ -32,22 +47,23 @@ export default {
       link.click();
       document.body.removeChild(link);
     },
-    updateCanvas(results) {
+    updateCanvas() {
       if (!this.$refs.canvas) return;
-      this.updateCanvasImage(results);
+      this.updateCanvasImage();
     },
-    updateCanvasImage(results) {
+    updateCanvasImage() {
       const { canvas } = this.$refs;
       const ctx = canvas.getContext("2d");
       const img = new Image();
       img.src = battle;
       img.onload = () => {
         ctx.drawImage(img, 0, 0);
-        this.updateCanvasText(results);
+        this.updateCanvasText();
       };
     },
-    updateCanvasText(results) {
-      console.log(results);
+    updateCanvasText() {
+      console.log("updateText" + this.val);
+      var results = this.val;
       const { canvas } = this.$refs;
       const ctx = canvas.getContext("2d");
       String.prototype.format = function() {
