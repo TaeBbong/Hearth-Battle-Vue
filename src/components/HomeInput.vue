@@ -40,28 +40,47 @@ export default {
   },
   data() {
     return {
-      newScore: "",
-      newFirst: "",
-      newWin: "",
-      battleTag: "",
+      newScore: null,
+      newFirst: null,
+      newWin: null,
+      battleTag: null,
       isResult: false,
       results: null
     };
   },
   methods: {
     calResult() {
+      if (!this.newScore) {
+        alert("점수를 입력하세요!");
+        return;
+      }
+      if (!this.newFirst) {
+        alert("1등 횟수를 입력하세요!");
+        return;
+      }
+      if (!this.newWin) {
+        alert("4등 이내 횟수를 입력하세요!");
+        return;
+      }
+      var score = this.newScore * 1;
+      var winGame = this.newWin;
+      var firstGame = this.newFirst;
       var battleTag = this.battleTag;
       var winPoint = this.newFirst * 90 + (this.newWin - this.newFirst) * 30;
       var losePoint = winPoint - this.newScore + 4000;
       var loseGame = losePoint / 50;
-      var totalPlay = loseGame + this.newWin * 1;
-      var avgPointPerGame = (this.newScore - 4000) / totalPlay;
-      var avgRankPerGame = 8 - ((avgPointPerGame + 90) / 180) * 8;
-      var winningRate = (this.newWin / totalPlay) * 100;
-      var estimateRank =
-        22.8 * Math.pow(11, 9) * Math.pow(2.714, -0.002 * this.newScore);
-      // console.log("calResult done!");
+      var totalPlay = parseInt(loseGame + this.newWin * 1);
+      var avgPointPerGame = (((score - 4000) / totalPlay) * 1).toFixed(2);
+      var avgRankPerGame = 8 - ((avgPointPerGame * 1 + 90) / 180) * 8;
+      var winningRate = ((this.newWin / totalPlay) * 100).toFixed(2);
+      var estimateRank = parseInt(
+        22.8 * Math.pow(11, 9) * Math.pow(2.714, -0.002 * this.newScore)
+      );
+      if (!this.battleTag) battleTag = "익명";
       this.results = {
+        score,
+        winGame,
+        firstGame,
         battleTag,
         loseGame,
         totalPlay,
@@ -70,6 +89,7 @@ export default {
         winningRate,
         estimateRank
       };
+      this.isResult = true;
       console.log("calResult done!" + this.results);
       // this.$refs.results.updateCanvasText();
     }
