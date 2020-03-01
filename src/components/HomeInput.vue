@@ -24,11 +24,13 @@
       <button class="myButton shadow" v-on:click="calResult">결과보기</button>
     </div>
     <HomeResult v-bind:val="results" v-if="results"></HomeResult>
+    <HomeFooter></HomeFooter>
   </div>
 </template>
 
 <script>
 import HomeResult from "./HomeResult";
+import HomeFooter from "./HomeFooter";
 
 export default {
   components: {

@@ -2,7 +2,6 @@
   <div id="app">
     <HomeHeader></HomeHeader>
     <HomeInput></HomeInput>
-    <HomeMore></HomeMore>
     <HomeFooter></HomeFooter>
   </div>
 </template>

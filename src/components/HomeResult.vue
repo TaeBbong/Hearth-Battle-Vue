@@ -1,7 +1,11 @@
 <template>
   <div>
-    <canvas id="canvas" ref="canvas" width="673" height="428"></canvas>
-    <button @click="downloadCanvas" id="download">다운로드</button>
+    <div>
+      <canvas id="canvas" ref="canvas" width="673" height="428"></canvas>
+    </div>
+    <div class="submitButton">
+      <button class="myButton shadow" @click="downloadCanvas" id="download">다운로드</button>
+    </div>
   </div>
 </template>
 
@@ -122,4 +126,17 @@ export default {
 </script>
 
 <style>
+.myButton {
+  background: burlywood;
+  width: 300px;
+  height: 50px;
+  border-style: none;
+  border-radius: 5px;
+  font-size: 0.9rem;
+}
+.submitButton {
+  height: 50px;
+  border-radius: 5px;
+  margin: 10px 5px 10px 5px;
+}
 </style>
