@@ -1,6 +1,6 @@
 <template>
   <div class="footer">
-    <a class="myA" href="github.com/TaeBbong">개발자 프로필</a>
+    <a class="myA" href="https://github.com/TaeBbong">개발자 프로필</a>
   </div>
 </template>
 
