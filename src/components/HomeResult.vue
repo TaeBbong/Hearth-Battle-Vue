@@ -1,18 +1,18 @@
 <template>
   <div>
-    <canvas id="canvas" ref="canvas" width="600" height="473"></canvas>
+    <canvas id="canvas" ref="canvas" width="673" height="428"></canvas>
     <button @click="downloadCanvas" id="download">다운로드</button>
   </div>
 </template>
 
 <script>
-import battle from "@/assets/battle.jpeg";
+import my_battle from "@/assets/전장으로.png";
 export default {
   data() {
     return {
       option: {
-        fontFamily: "Gulim",
-        fontSize: 30,
+        fontFamily: "Apple SD Gothic Neo",
+        fontSize: 20,
         fontColor: "#FFFFFF",
         fontWeight: "normal"
       },
@@ -55,9 +55,11 @@ export default {
       const { canvas } = this.$refs;
       const ctx = canvas.getContext("2d");
       const img = new Image();
-      img.src = battle;
+      img.src = my_battle;
+      img.width = img.width / 3;
+      img.height = img.height / 3;
       img.onload = () => {
-        ctx.drawImage(img, 0, 0);
+        ctx.drawImage(img, 0, 0, 673, 428);
         this.updateCanvasText();
       };
     },
@@ -72,8 +74,9 @@ export default {
           return args[+a.substr(1, a.length - 2) || 0];
         });
       };
-      var text = "{0}의 전장\n총 플레이 경기: {1}\n평균 등수: {2}\n승률: {3}\n전체 랭킹: {4}".format(
+      var text = "{0}의 전장\n점수: {1}점\n총 플레이 경기: {2}판\n평균 등수: {3}등\n승률: {4}%\n전체 랭킹: {5}등".format(
         results["battleTag"],
+        results["score"],
         results["totalPlay"],
         results["avgRankPerGame"],
         results["winningRate"],
@@ -84,17 +87,35 @@ export default {
 
       ctx.textAlign = "center";
       ctx.textBaseline = "middle";
-      ctx.font = `${fontWeight} ${fontSize}px ${fontFamily}`;
 
-      const lines = text.split("\n");
-      lines.forEach((line, index) => {
-        ctx.fillStyle = fontColor;
-        ctx.fillText(
-          line,
-          canvas.width / 2,
-          canvas.height - fontSize * (lines.length - index) * 1.5
-        );
-      });
+      // Writing Text
+      // 1. user name
+      ctx.fillStyle = "#ffffff";
+      ctx.font = `${"bold"} ${15}px ${fontFamily}`;
+      ctx.fillText(`${results["battleTag"]}`, canvas.width / 2, 66);
+
+      // 2. Other scores
+      ctx.font = `${"bold"} ${30}px ${fontFamily}`;
+      ctx.fillText(`${results["score"]}`, 145, 228);
+      ctx.fillText(`${results["totalPlay"]}`, 270, 228);
+      ctx.fillText(`${results["winningRate"]}%`, 405, 228);
+      ctx.fillText(`${results["avgRankPerGame"]}`, 533, 228);
+
+      // 3. Estimated Rank
+      ctx.font = `${"bold"} ${30}px ${fontFamily}`;
+      ctx.fillText(`${results["estimateRank"]}등`, 405, 325);
+
+      // 4. Date
+      ctx.font = `${"bold"} ${13}px ${fontFamily}`;
+      var today = new Date();
+      var myToday =
+        today.getFullYear() +
+        "년 " +
+        (today.getMonth() + 1) +
+        "월 " +
+        today.getDate() +
+        "일";
+      ctx.fillText(myToday, canvas.width / 2, 128);
     }
   }
 };

@@ -71,8 +71,10 @@ export default {
       var loseGame = losePoint / 50;
       var totalPlay = parseInt(loseGame + this.newWin * 1);
       var avgPointPerGame = (((score - 4000) / totalPlay) * 1).toFixed(2);
-      var avgRankPerGame = 8 - ((avgPointPerGame * 1 + 90) / 180) * 8;
-      var winningRate = ((this.newWin / totalPlay) * 100).toFixed(2);
+      var avgRankPerGame = (8 - ((avgPointPerGame * 1 + 90) / 180) * 8).toFixed(
+        2
+      );
+      var winningRate = ((this.newWin / totalPlay) * 100).toFixed(1);
       var estimateRank = parseInt(
         22.8 * Math.pow(11, 9) * Math.pow(2.714, -0.002 * this.newScore)
       );
